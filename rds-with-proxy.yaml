@@ -12,11 +12,11 @@ Mappings:
   ClusterSettings:
     global:
       dbSchema: mylab
-      dbVersion: 5.7.mysql_aurora.2.09.1
+      dbVersion: 8.0.mysql_aurora.3.07.0
       dbEngine: aurora-mysql
-      dbFamily: aurora-mysql5.7
+      dbFamily: aurora-mysql8.0
       port: 3306
-      nodeType: db.r5.large
+      nodeType: db.t3.medium
 
 Resources:
   vpc:
@@ -200,7 +200,7 @@ Resources:
       StorageEncrypted: true
       VpcSecurityGroupIds: [ !Ref dbClusterSecGroup ]
       EnableCloudwatchLogsExports: [ error, slowquery ]
-      BacktrackWindow: 86400
+      #BacktrackWindow: 86400
       EnableIAMDatabaseAuthentication: true
       Tags:
         - Key: Name
@@ -218,8 +218,8 @@ Resources:
       MonitoringInterval: 1
       MonitoringRoleArn: !GetAtt roleEnhancedMonitoring.Arn
       PubliclyAccessible: false
-      EnablePerformanceInsights: true
-      PerformanceInsightsRetentionPeriod: 7
+      #EnablePerformanceInsights: true
+      #PerformanceInsightsRetentionPeriod: 7
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-mysql-node-1"
@@ -236,8 +236,8 @@ Resources:
       MonitoringInterval: 1
       MonitoringRoleArn: !GetAtt roleEnhancedMonitoring.Arn
       PubliclyAccessible: false
-      EnablePerformanceInsights: true
-      PerformanceInsightsRetentionPeriod: 7
+      #EnablePerformanceInsights: true
+      #PerformanceInsightsRetentionPeriod: 7
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-mysql-node-2"

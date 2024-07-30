@@ -1,0 +1,3 @@
+pymysql
+aws-lambda-powertools
+aws-xray-sdk

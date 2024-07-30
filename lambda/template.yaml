@@ -44,8 +44,14 @@ Conditions:
 Globals:
   Function:
     Timeout: 30
+    Tracing: Active
+    Layers:
+      - !Sub "arn:aws:lambda:af-south-1:012438385374:layer:LambdaInsightsExtension:44"
+    #LoggingConfig:
+      #LogFormat: JSON
 
 Resources:
+
   LambdaSg:
     Type: AWS::EC2::SecurityGroup
     Condition: CreateLambdaSg
@@ -81,6 +87,7 @@ Resources:
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn:
               !Ref SecretArn
+        - CloudWatchLambdaInsightsExecutionRolePolicy
       Environment:
         Variables:
           region: !Ref AWS::Region
@@ -106,6 +113,7 @@ Resources:
           - !If [CreateLambdaSg, !Ref LambdaSg, !Ref LambdaSecurityGroupId]
         SubnetIds: !Ref Subnets
       Policies:
+        - CloudWatchLambdaInsightsExecutionRolePolicy
         - Statement:
             - Sid: AllowDbConnect
               Effect: Allow
@@ -140,6 +148,6 @@ Outputs:
     Description: "API Gateway endpoint URL for rds function"
     Value: !Sub "https://${SampleHttpApi}.execute-api.${AWS::Region}.amazonaws.com/no-proxy"
 
-  LambdaSecurityGroupId:
-    Description: "Security group id attached to lambda functions. Make sure traffic from this SG is allowed in database and proxy security group on db port"
-    Value: !GetAtt LambdaSg.GroupId
+  #LambdaSecurityGroupId:
+  #  Description: "Security group id attached to lambda functions. Make sure traffic from this SG is allowed in database and proxy security group on db port"
+  #  Value: !GetAtt LambdaSg.GroupId

@@ -1,0 +1,9 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "rds-proxy-lambda-2"
+resolve_s3 = true
+s3_prefix = "rds-proxy-lambda-2"
+region = "af-south-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Vpc=\"vpc-04c36bad790605569\" Subnets=\"subnet-02c50d272d1049c94\" RdsProxyEndpoint=\"rds-proxy.proxy-csh5ndq6v79g.af-south-1.rds.amazonaws.com\" RdsEndpoint=\"rds-with-proxy-2-mysql-cluster.cluster-ro-csh5ndq6v79g.af-south-1.rds.amazonaws.com\" Port=\"3306\" SecretArn=\"arn:aws:secretsmanager:af-south-1:718974227478:secret:secretClusterMasterUser-a9utzKoz7dAY-HnqyYJ\" ProxyResourceId=\"prx-08dad001e2bdcd64b\" CreateFunctionSecurityGroup=\"False\" LambdaSecurityGroupId=\"sg-02104d107f65e31f0 \""
+image_repositories = []
